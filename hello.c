@@ -13,6 +13,11 @@
 // EXPORT_SYMBOL(name);
 // EXPORT_SYMBOL_GPL(name);
 
+static char* whom = "world";
+static int howmany = 1;
+module_param(howmany, int, S_IRUGO);
+module_param(whom, charp, S_IRUGO);
+
 static void print_process_id(void) 
 {
     printk(KERN_INFO "The process is \"%s\" (pid %i)\n",
@@ -28,6 +33,7 @@ static int __init hello_init(void)
 {
     printk(KERN_ALERT "Hello, world\n");
     print_process_id();
+
     return 0;
 }
 
