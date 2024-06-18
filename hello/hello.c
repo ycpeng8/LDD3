@@ -1,6 +1,3 @@
-//
-// Created by ycpeng on 6/6/2024.
-//
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -51,4 +48,3 @@ module_exit(hello_exit);
 
 // MODULE_ declarations
 MODULE_LICENSE("Dual BSD/GPL");
-MODULE_AUTHOR("ycpeng");
