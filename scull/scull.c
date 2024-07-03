@@ -3,6 +3,7 @@
 #include <linux/types.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
+#include <linux/kernel.h>
 
 #include "scull.h"
 
@@ -25,6 +26,12 @@ struct file_operations scull_fops = {
 	.open =		scull_open,
 	.release =	scull_release,
 };
+
+/* open and close */
+int scull_open(struct inode* inode, struct file* flip)
+{
+	struct scull_dev *dev;					/* device information */
+}
 
 /* set up char_dev structure */
 static void scull_setup_cdev(struct scull_dev *dev, int index)
