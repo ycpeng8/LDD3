@@ -21,6 +21,19 @@ extern int scull_minor;
 extern int scull_nr_devs;
 
 /*
+ * device registration
+ */
+struct scull_dev {
+    struct scull_qset *data;        /* pointer to first quantum set */
+    int quantum;                    /* the current quantum size */
+    int qset;                       /* the current array size */
+    unsigned long size;             /* amount of data stored here */
+    unsigned int access_key;        /* used by sculluid and scullpriv */
+    struct semaphore sem;           /* mutual exclusion semaphore */
+    struct cdev cdev;               /* char device structure */
+}
+
+/*
  * file operations functions
  */
 loff_t scull_llseek(struct file* filp, loff_t off, int whence);
