@@ -28,9 +28,19 @@ struct file_operations scull_fops = {
 };
 
 /* open and close */
-int scull_open(struct inode* inode, struct file* flip)
+int scull_open(struct inode* inode, struct file* filp)
 {
 	struct scull_dev *dev;					/* device information */
+
+	dev = container_of(inode->i_cdev, struct scull_dev, cdev);
+	filp->private_data = dev;				/* for other methods */
+
+	/* now trim to 0 the length of the device if open was write-only */
+	if ((filp->f_flags & O_ACCMODE) == O_WRONLY) {
+		scull_trim(dev);	/* ignore errors */
+	}
+
+	return 0;			/* success */
 }
 
 /* set up char_dev structure */
